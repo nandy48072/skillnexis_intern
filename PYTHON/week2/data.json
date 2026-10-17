@@ -1,0 +1,12 @@
+{
+    "student": {
+        "name": "Nandhini",
+        "roll_number": "101",
+        "skills": [
+            "Python",
+            "Android",
+            "Flutter"
+        ]
+    },
+    "course": "Data Structures & Loops"
+}
