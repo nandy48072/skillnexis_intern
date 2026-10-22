@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Clock & Countdown Timer</title>
+  <style>
+    /* Basic Styling & Layout */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2.5rem 3.5rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      max-width: 450px;
+      width: 100%;
+    }
+
+    h2 {
+      color: #38bdf8;
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .clock {
+      font-size: 3rem;
+      font-weight: bold;
+      letter-spacing: 3px;
+      margin-bottom: 2rem;
+      color: #f8fafc;
+      text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+    }
+
+    .countdown {
+      font-size: 1.4rem;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+
+    .divider {
+      border: 0;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.15);
+      margin: 1.5rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Live Digital Clock Section -->
+    <h2>Live Digital Clock</h2>
+    <div id="digital-clock" class="clock">00:00:00</div>
+
+    <hr class="divider">
+
+    <!-- Optional Countdown Timer Section -->
+    <h2>Countdown to New Year</h2>
+    <div id="countdown-timer" class="countdown">Loading...</div>
+  </div>
+
+  <script>
+    // 1. Live Updating Digital Clock (HH:MM:SS)
+    function updateClock() {
+      const now = new Date(); // Creates a Date object for the current time[cite: 10]
+      
+      let hours = String(now.getHours()).padStart(2, '0');
+      let minutes = String(now.getMinutes()).padStart(2, '0');
+      let seconds = String(now.getSeconds()).padStart(2, '0');
+      
+      // Update the DOM element
+      document.getElementById('digital-clock').innerText = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Call updateClock every 1000ms (1 second) using setInterval[cite: 10]
+    setInterval(updateClock, 1000);
+    updateClock(); // Immediate call to avoid 1-second initial delay
+
+    // 2. Countdown Timer to New Year
+    function updateCountdown() {
+      const currentYear = new Date().getFullYear();
+      const targetDate = new Date(`January 1, ${currentYear + 1} 00:00:00`).getTime();
+      const now = new Date().getTime();
+      const timeLeft = targetDate - now;
+
+      if (timeLeft < 0) {
+        document.getElementById('countdown-timer').innerText = "Happy New Year!";
+        return;
+      }
+
+      // Calculate days, hours, minutes, and seconds remaining
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      // Display the result
+      document.getElementById('countdown-timer').innerText = 
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+
+</body>
+</html>
