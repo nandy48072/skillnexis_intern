@@ -1,0 +1,2 @@
+12,Nandhu,IT,30000.0
+34,Sanmati,Medicine,40000.0

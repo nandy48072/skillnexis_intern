@@ -1,0 +1,2 @@
+Java programming is fun. Java and Python are popular.
+File handling in Java is very powerful.
